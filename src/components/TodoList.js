@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-
+import { deleteTodoList } from '../actions'
 export class TodoList extends Component {
-    
+    constructor() {
+        super();                     
+        this.onClick=this.onClick.bind(this);
+      }
+    onClick(e) {
+        this.props.deleteTodoList(this.props.id)
+        if(this.props.todoList.error)
+        alert(this.props.todoList.error);
+        else
+        this.props.history.push(`/todo-lists/${this.props.auth.user.id}`);
+      }
     render() {
         return (
             <div className="container">
@@ -28,7 +38,7 @@ export class TodoList extends Component {
                                                 <i className="fa fa-flag-checkered pr-1">Update To-Do Info </i>
                                             </li>
                                      </Link>                                            
-                                     <Link to="/todo-items">
+                                     <Link onClick={this.onClick()}>
                                             <li className="list-group-item delete">
                                                 <i className="fa fa-minus-circle pr-1">Delete To-Do</i>
                                             </li>
@@ -41,5 +51,12 @@ export class TodoList extends Component {
         )
     }
 }
-  
-  export default TodoList
+const mapStateToProps = state => ({
+    todoList: state.todoList,
+    auth:state.auth,
+})
+export default connect(
+    mapStateToProps,
+    { deleteTodoList }
+  )(TodoList);
+

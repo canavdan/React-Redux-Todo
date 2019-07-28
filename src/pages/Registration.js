@@ -1,7 +1,29 @@
 import React, { Component } from 'react'
 import Header from '../containers/templates/Header';
-
-export class Registration extends Component {
+import {connect} from 'react-redux'
+import { Link } from 'react-router-dom';
+import { createUser } from '../actions'
+class Registration extends Component {
+    constructor() {
+        super();   
+        this.state = {
+          username: "",
+          password: "",
+          email:"",
+        };
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange=this.onChange.bind(this);
+      }
+    onChange(e) {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+    onSubmit(e) {
+        e.preventDefault();  
+        this.props.createUser(this.state.username,this.state.password,this.state.email);
+        if(this.props.auth.error){
+            alert(this.props.auth.error)
+          }
+      }
   render() {
     return (
       <div>
@@ -14,20 +36,18 @@ export class Registration extends Component {
                     <p className="lead text-center">Create your Account</p>
                     <form action="create-profile.html">
                         <div className="form-group">
-                            <input type="text" className="form-control form-control-lg" placeholder="Name" name="name"
-                                required />
+                            <input type="text" className="form-control form-control-lg" placeholder="Username" name="username"
+                                 required minLength="4"/>
                         </div>
                         <div className="form-group">
                             <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email" />
 
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" />
+                            <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" 
+                            required minLength="4"/>
                         </div>
-                        <div className="form-group">
-                            <input type="password" className="form-control form-control-lg" placeholder="Confirm Password"
-                                name="password2" />
-                        </div>
+                       
                         <input type="submit" className="btn btn-info btn-block mt-4" />
                     </form>
                 </div>
@@ -38,5 +58,10 @@ export class Registration extends Component {
     )
   }
 }
-
-export default Registration
+const mapStateToProps = state => ({
+    auth: state.auth,
+  })
+  export default connect(
+    mapStateToProps,
+    { createUser }
+  )(Registration);

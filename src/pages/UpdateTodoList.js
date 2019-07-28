@@ -10,13 +10,13 @@ class UpdateTodoList extends Component {
           name: "",
           createdAt: "",
           description: "",
-          memberId:"1"
+          memberId:""
         };
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange=this.onChange.bind(this);
       }
     componentDidMount(){
-       // const { match: { params } } = this.props;  
+      
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value });

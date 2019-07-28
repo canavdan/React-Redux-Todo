@@ -15,8 +15,7 @@ class TodoListForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange=this.onChange.bind(this);
       }
-    componentDidMount(){
-       // const { match: { params } } = this.props;  
+    componentDidMount(){ 
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value });

@@ -8,9 +8,9 @@ import {
     LOGIN_USER_FAILURE,
   } from './types'
 
-  export const createUserSuccess = response => ({
+  export const createUserSuccess = token => ({
     type: CREATE_USER_SUCCESS,
-    payload: response,
+    payload: token,
   })
   
   export const createUserFail = error => ({
@@ -42,34 +42,38 @@ import {
 
   export const dispatchLogin = () => ({ type: LOGIN_USER_SUCCESS })
   
-  export const createUser = (email, password) => dispatch => {
+  export const createUser = (email, password) => async dispatch => {
+    dispatch(sessionLoading())    
+      const response = await fetch('http://localhost:8080/api/v1/member/sign-up', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({email, password}),
+      })
+     
+      if (response.ok) {
+        createUserSuccess(response.JWTtoken);
+      } else{
+        const errMessage = await response.text()
+        createUserFail(errMessage);
+      }
+    
+    }        
+  export const loginUser = (email, password) => async dispatch => {
     dispatch(sessionLoading())
-    //   
-    /*firebaseService
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(response => dispatch(createUserSuccess(response)))
-    .catch(error => dispatch(createUserFail(error)))*/
-  }
-  
-  export const loginUser = (email, pass) => dispatch => {
-    dispatch(sessionLoading())
-   //
-   /*firebaseService
-    .auth()
-    .signInWithEmailAndPassword(email, pass)
-    .then(response => dispatch(loginUserSuccess(response)))
-    .catch(error => dispatch(loginUserFail(error)))*/
+    const response = await fetch('http://localhost:8080/api/v1/member/login', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify({email, password}),
+    })
+   
+    if (response.ok) {
+      createUserSuccess(response.JWTtoken);
+    } else{
+      const errMessage = await response.text()
+      createUserFail(errMessage);
+    }
   }
   export const logoutUser = () => dispatch => {
     dispatch(sessionLoading())
-    /*firebaseService
-      .auth()
-      .signOut()
-      .then(() => {
-        dispatch(loginOut())
-      })
-      .catch(error => {
-        dispatch(sessionError(error))
-      })*/
+      loginOut()
   }

@@ -37,9 +37,9 @@ import {
     type: UPDATE_TODO_LIST_FAILURE,
     payload: error,
   })
-  export const deleteTodoList = error => ({
+  export const deleteTodoListAc = response => ({
     type: DELETE_TODO_LIST,
-    payload: error,
+    payload: response,
   })
   export const deleteTodoListFailure = error => ({
     type: DELETE_TODO_LIST_FAILURE,
@@ -50,7 +50,6 @@ import {
     dispatch(fetchTodoListRequest())
     try {     
       const apiUrl = `http://localhost:8080/api/v1/todolist/all/${memberId}`
-     // const apiUrl = `http://localhost:8080/api/v1/todolist/all/`
       const response = await fetch(apiUrl)
       const json = await response.json()
   
@@ -68,8 +67,6 @@ import {
   })
 
   export const createTodoList = (newTodo) => async dispatch => {
-    console.log(newTodo)
-    console.log(newTodo["name"])
     try {     
       const response=await fetch('http://localhost:8080/api/v1/todolist', {
         method: 'POST',
@@ -108,3 +105,16 @@ import {
     }
   }
   
+  export const deleteTodoList = (todoListId) => async dispatch => {    
+    try {     
+      const response= await fetch( `http://localhost:8080/api/v1/todolist/${todoListId}`, {
+        method: 'DELETE',
+        headers: {'Content-Type':'application/json'},     
+       })
+       const json = await response.json()
+      dispatch(deleteTodoListAc(json))
+
+    } catch (error) {
+      dispatch(deleteTodoListFailure(error))
+    }
+  }
