@@ -8,14 +8,15 @@ import thunk from 'redux-thunk'
 import reducers from './reducers'
 import { BrowserRouter , Route } from "react-router-dom"
 import { Switch } from 'react-router'
-import { LoginPage } from './pages/LoginPage';
-import { MainPage } from './pages/MainPage';
+import  LoginPage  from './pages/LoginPage';
+import  MainPage  from './pages/MainPage';
 import Registration from './pages/Registration';
-import { TodoItem } from './pages/TodoItem';
-import { TodoListForm } from './pages/TodoListForm';
-import { TodoListItemForm } from './pages/TodoListItemForm';
-import { TodoLists } from './pages/TodoLists';
+import  TodoItem  from './pages/TodoItem';
+import  TodoListForm  from './pages/TodoListForm';
+import TodoListItemForm  from './pages/TodoListItemForm';
+import  TodoLists  from '../src/pages/TodoLists';
 import 'bootstrap/dist/css/bootstrap.css';
+
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
@@ -27,9 +28,11 @@ ReactDOM.render(<Provider store={store}>
          <Route exact path="/mainpage" component={MainPage} />
          <Route exact path="/register" component={Registration} />
          <Route exact path="/todo-items/:id" component={TodoItem} />
-         <Route exact path="/addtodolist" component={TodoListForm} />
+         <Route exact path="/addtodolist" component={TodoListForm} />,
+         <Route exact path="/updatetodolist/:id" component={TodoListForm} />
          <Route exact path="/addtodolistitem" component={TodoListItemForm} />
-         <Route exact path="/todo-lists" component={TodoLists} />        
+         <Route exact path="/updatetodolistitem/:id" component={TodoListItemForm} />
+         <Route exact path="/todo-lists/:id" component={TodoLists} />     
          <Route path="/*" component={() => 'NOT FOUND'} />
       </Switch>
       </BrowserRouter>

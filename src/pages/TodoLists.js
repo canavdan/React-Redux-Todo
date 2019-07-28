@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Header from '../containers/templates/Header';
 import { Link } from 'react-router-dom';
-export class TodoLists extends Component {
+import { fetchTodoList } from '../actions'
+import TodoList from '../components/TodoList'
+class TodoLists extends Component {
+
+      componentDidMount() {
+        const { match: { params } } = this.props;   
+         this.props.fetchTodoList(params.id);
+         
+      }
   render() {
     return (
       <div>
@@ -13,41 +22,11 @@ export class TodoLists extends Component {
                     <h1 className="display-4 text-center">To-Do Lists</h1>
                     <br />
                     <Link to="/addtodolist"  className="btn btn-lg btn-info">Create a To-Do</Link>   
- 
                     <br />
-                    <hr />
-                    <div className="container">
-                        <div className="card card-body bg-light mb-3">
-                            <div className="row">
-                                <div className="col-2">
-                                    <span className="mx-auto">REACT</span>
-                                </div>
-                                <div className="col-lg-6 col-md-4 col-8">
-                                    <h3>Spring / React Project</h3>
-                                    <p>Project to create a Kanban Board with Spring Boot and React</p>
-                                </div>
-                                <div className="col-md-4 d-none d-lg-block">
-                                    <ul className="list-group">
-                                    <Link to="/todo-items">                                   
-                                            <li className="list-group-item board">
-                                                <i className="fa fa-flag-checkered pr-1">To-Do Board </i>
-                                            </li>
-                                     </Link>
-                                     <Link to="/addtodolist">                                   
-                                            <li className="list-group-item board">
-                                                <i className="fa fa-flag-checkered pr-1">Update To-Do Info </i>
-                                            </li>
-                                     </Link>                                            
-                                        <a href="">
-                                            <li className="list-group-item delete">
-                                                <i className="fa fa-minus-circle pr-1">Delete To-Do</i>
-                                            </li>
-                                        </a>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                   
+                    <hr />                   
+                    {this.props.todoList.todoList.map((item, index) => (
+                         <TodoList  {...item}/> 
+                     ))}                            
                 </div>
             </div>
         </div>
@@ -57,4 +36,11 @@ export class TodoLists extends Component {
   }
 }
 
-export default TodoLists
+const mapStateToProps = state => ({
+    todoList: state.todoList,
+})
+export default connect(
+    mapStateToProps,
+    { fetchTodoList }
+  )(TodoLists);
+

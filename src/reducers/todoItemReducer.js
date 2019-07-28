@@ -2,7 +2,7 @@ import {
     FETCHING_TODO_ITEM_FAILURE,
     FETCHING_TODO_ITEM_REQUEST,
     FETCHING_TODO_ITEM_SUCCESS,
-  } from './types'
+  } from '../actions/types'
 
   const initialState = {
     isLoading: false,
@@ -10,7 +10,7 @@ import {
     errorMessage: '',
   }
 
-  export default (state = initialState, { type, payload }) => {
+const toItemReducer= (state = initialState, { type, payload }) => {
     switch (type) {
         case FETCHING_TODO_ITEM_REQUEST:
           return { ...state, isLoading: true }
@@ -22,3 +22,4 @@ import {
           return state
       }
 }
+export default toItemReducer;

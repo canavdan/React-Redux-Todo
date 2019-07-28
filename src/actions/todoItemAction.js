@@ -16,19 +16,26 @@ import {
     payload: error,
   })
 
-  export const fetchTodoItem = () => async dispatch => {
+  export const fetchTodoItem = (todoListId) => async dispatch => {
     dispatch(fetchTodoItemRequest())
     try {
-      const apiUrl = ``
+     //const apiUrl = `http://localhost:8080/api/v1/todolist/all/${todoListId}`
+     const apiUrl = `http://localhost:8080/api/v1/todoitem/all`
       const response = await fetch(apiUrl)
       const json = await response.json()
-      dispatch(fetchTodoItemSuccess(json.launches.map(processTodoItem)))
+      
+      dispatch(fetchTodoItemSuccess(json.map(processTodoItem)))
     } catch (error) {
       dispatch(fetchTodoItemFailure(error))
     }
   }
 
-  const processTodoItem = todoList => ({
-    name: todoList.name,
-    id: todoList.id,   
+  const processTodoItem = todoItem => ({
+    name: todoItem.name,
+    id: todoItem.id,   
+    description:todoItem.description,
+    priority:todoItem.priority,
+    status:todoItem.status.id,
+    todoListId:todoItem.todoList.id,
+    todoItem:todoItem.deadline
   })
