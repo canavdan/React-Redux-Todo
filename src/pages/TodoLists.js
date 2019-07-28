@@ -8,8 +8,7 @@ class TodoLists extends Component {
 
       componentDidMount() {
         const { match: { params } } = this.props;   
-         this.props.fetchTodoList(params.id);
-         
+         this.props.fetchTodoList(params.id);        
       }
   render() {
     return (

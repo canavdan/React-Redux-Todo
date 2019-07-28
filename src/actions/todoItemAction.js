@@ -19,8 +19,7 @@ import {
   export const fetchTodoItem = (todoListId) => async dispatch => {
     dispatch(fetchTodoItemRequest())
     try {
-     //const apiUrl = `http://localhost:8080/api/v1/todolist/all/${todoListId}`
-     const apiUrl = `http://localhost:8080/api/v1/todoitem/all`
+     const apiUrl = `http://localhost:8080/api/v1/todoitem/all/${todoListId}`
       const response = await fetch(apiUrl)
       const json = await response.json()
       

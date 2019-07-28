@@ -15,6 +15,7 @@ import  TodoItem  from './pages/TodoItem';
 import  TodoListForm  from './pages/TodoListForm';
 import TodoListItemForm  from './pages/TodoListItemForm';
 import  TodoLists  from '../src/pages/TodoLists';
+import  UpdateTodoList  from '../src/pages/UpdateTodoList';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
@@ -29,7 +30,7 @@ ReactDOM.render(<Provider store={store}>
          <Route exact path="/register" component={Registration} />
          <Route exact path="/todo-items/:id" component={TodoItem} />
          <Route exact path="/addtodolist" component={TodoListForm} />,
-         <Route exact path="/updatetodolist/:id" component={TodoListForm} />
+         <Route exact path="/updatetodolist/:id" component={UpdateTodoList} />
          <Route exact path="/addtodolistitem" component={TodoListItemForm} />
          <Route exact path="/updatetodolistitem/:id" component={TodoListItemForm} />
          <Route exact path="/todo-lists/:id" component={TodoLists} />     

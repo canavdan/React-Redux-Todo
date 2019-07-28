@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Header from '../containers/templates/Header';
 import { Link } from 'react-router-dom';
 
 export class TodoList extends Component {

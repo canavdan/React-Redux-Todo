@@ -3,7 +3,11 @@ import {
     FETCHING_TODO_LIST_REQUEST,
     FETCHING_TODO_LIST_SUCCESS,
     ADD_TODO_LIST,
-    ADD_TODO_LIST_FAILURE
+    ADD_TODO_LIST_FAILURE,
+    UPDATE_TODO_LIST_FAILURE,
+    DELETE_TODO_LIST_FAILURE,
+    UPDATE_TODO_LIST,
+    DELETE_TODO_LIST
   } from '../actions/types'
 
   const initialState = {
@@ -21,9 +25,17 @@ import {
         case FETCHING_TODO_LIST_FAILURE:
           return { ...state, isLoading: false, errorMessage:payload }
           case ADD_TODO_LIST:
-          return { ...state }
+          return { ...state,errorMessage:"",todoList:{...state.todoList,payload} }
           case ADD_TODO_LIST_FAILURE:
           return { ...state, errorMessage:payload }
+          case UPDATE_TODO_LIST_FAILURE:
+          return { ...state, errorMessage:payload }
+          case DELETE_TODO_LIST_FAILURE:
+          return { ...state, errorMessage:payload }
+          case DELETE_TODO_LIST:
+          return { ...state,errorMessage:"" }
+          case UPDATE_TODO_LIST:
+          return { ...state,errorMessage:"" }
         default:
           return state
       }
