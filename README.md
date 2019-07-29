@@ -20,10 +20,10 @@ In this project :
 - Bootstrap
 
 ## Pics
-<img width="35%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_1.png?raw=true"/>
-<img width="35%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_4.png?raw=true"/>
-<img width="35%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_5.png?raw=true"/>
-<img width="35%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_7.png?raw=true"/>
+<img width="45%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_1.png?raw=true"/>
+<img width="45%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_4.png?raw=true"/>
+<img width="45%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_5.png?raw=true"/>
+<img width="45%" src="https://github.com/canavdan/React-Redux-Todo/blob/master/pics/Screenshot_7.png?raw=true"/>
 
 
 ## Getting started
